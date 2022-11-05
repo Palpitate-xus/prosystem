@@ -112,6 +112,9 @@
         if (this.value_chosen == []) {
           this.$alert("当前未选中任何属性", "Error", {confirmButtonText: '确定'})
         } else {
+          if(this.value_chosen.length == 1){
+            this.value_chosen.push(this.value_chosen[0])
+          }
           await axios.post('http://localhost:8000/api/handle_infer', {'data': this.value_chosen}).then((res) => {
             console.log(res.data.data);
             let result = res.data.data
