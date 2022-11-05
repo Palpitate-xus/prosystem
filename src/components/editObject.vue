@@ -84,7 +84,8 @@
       }
     },
     mounted(){
-      this.get_list();
+      this.fetch_field();
+      this.fetch_class();
     },
     methods: {
       handleClose(tag) {
@@ -121,7 +122,11 @@
       },
 
       async handle_save() {
-        this.dialogFormVisible = false
+        this.dialogFormVisible = false;
+        console.log(this.form);
+        await axios.post('http://localhost:8000/api/handle_update', this.form).then((res) => {
+          console.log(res.data);
+        })
       },
     }
   }

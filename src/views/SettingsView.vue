@@ -2,6 +2,7 @@
   <div>
     <el-button @click="handleDelete">批量删除</el-button>
     <el-button @click="handleAdd">新增对象</el-button>
+    <el-button @click="get_list">刷新</el-button>
     <el-table
       ref="filterTable"
       :data="tableData"
@@ -81,6 +82,12 @@
         filterDataProperty:[],
         tableData: [],
         muSelection: [],
+        form:{
+          id: '',
+          object: '',
+          field: '',
+          properties: [],
+        },
       }
     },
     mounted(){
@@ -116,6 +123,7 @@
       },
       handleAdd(){
         this.$refs['update'].dialogFormVisible = true;
+        this.$refs['update'].form = this.form;
       },
       async handleDelete(){
         await axios.post('http://localhost:8000/api/handle_delete', this.muSelection).then((res) => {
