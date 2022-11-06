@@ -2,7 +2,7 @@
   <div>
     <el-button @click="handleDelete" type="danger" icon="el-icon-delete">批量删除</el-button>
     <el-button @click="handleAdd" icon="el-icon-plus">新增对象</el-button>
-    <el-button @click="get_list" icon="el-icon-setting">领域管理</el-button>
+    <el-button @click="handleField" icon="el-icon-setting">领域管理</el-button>
     <el-button @click="get_list" type="primary" icon="el-icon-s-promotion">刷新</el-button>
     <el-table
       v-loading="loading"
@@ -66,16 +66,19 @@
     </el-table-column>
     </el-table>
     <edit-dialog ref="update"></edit-dialog>
+    <edit-field ref="field"></edit-field>
   </div>
   </template>
 
   <script>
   import axios from 'axios'
   import editDialog from '../components/editObject.vue'
+  import editField from "../components/editField.vue"
   export default {
     name: 'SettingsView',
     components:{
       editDialog,
+      editField,
     },
     data(){
       return {
@@ -126,6 +129,9 @@
       handleAdd(){
         this.$refs['update'].dialogFormVisible = true;
         this.$refs['update'].form = this.form;
+      },
+      handleField(){
+        this.$refs['field'].fieldEditVisible = true;
       },
       async handleDelete(){
         await axios.post('http://localhost:8000/api/handle_delete', this.muSelection).then((res) => {

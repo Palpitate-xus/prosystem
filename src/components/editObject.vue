@@ -1,7 +1,8 @@
 <template>
     <div>
       <el-dialog
-        :visible="dialogFormVisible"
+        :visible.sync="dialogFormVisible"
+        :before-close="handleCloseDialog"
         title="编辑">
         <el-form :model="form" label-width="85px">
           <el-form-item label="id:">
@@ -75,7 +76,6 @@
     },
     mounted(){
       this.fetch_field();
-      this.fetch_class();
     },
     methods: {
       handleClose(tag) {
@@ -88,7 +88,13 @@
           console.log(_this.fields);
         })
       },
-
+      handleCloseDialog(done){
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      },
       showInput() {
         this.inputVisible = true;
         this.$nextTick(_ => {
