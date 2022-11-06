@@ -17,7 +17,7 @@
                 filterable
                 :key="item.id"
                 :label="item.field"
-                :value="item.id"
+                :value="item.field"
               />
             </el-select>
           </el-form-item>
@@ -110,6 +110,8 @@
         console.log(this.form);
         await axios.post('http://localhost:8000/api/handle_update', this.form).then((res) => {
           console.log(res.data);
+        }).catch((res) => {
+          console.log(res)
         })
       },
     }

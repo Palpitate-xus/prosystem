@@ -3,7 +3,7 @@
     <el-button @click="handleDelete" type="danger" icon="el-icon-delete">批量删除</el-button>
     <el-button @click="handleAdd" icon="el-icon-plus">新增对象</el-button>
     <el-button @click="get_list" icon="el-icon-setting">领域管理</el-button>
-    <el-button @click="get_list" type="primary">刷新</el-button>
+    <el-button @click="get_list" type="primary" icon="el-icon-s-promotion">刷新</el-button>
     <el-table
       v-loading="loading"
       ref="filterTable"
