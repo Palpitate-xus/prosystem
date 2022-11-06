@@ -1,6 +1,6 @@
 .DS_Store
-node_modules/
-/dist/
+/vue-ui/node_modules/
+/vue-ui/dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
