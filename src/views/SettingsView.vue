@@ -122,7 +122,6 @@
         this.$refs['update'].dialogFormVisible = true;
         this.$refs['update'].form = row;
         this.$refs['update'].fetch_field();
-        this.$refs['update'].fetch_class();
       },
       handleAdd(){
         this.$refs['update'].dialogFormVisible = true;
@@ -131,12 +130,12 @@
       async handleDelete(){
         await axios.post('http://localhost:8000/api/handle_delete', this.muSelection).then((res) => {
         })
-        this.get_list();
+        await this.get_list();
       },
       async handleDeleteItem(index, row){
         await axios.post('http://localhost:8000/api/handle_delete', [row]).then((res) => {
         })
-        this.get_list();
+        await this.get_list();
       },
       handleSelectionChange(val) {
         this.muSelection = val;
