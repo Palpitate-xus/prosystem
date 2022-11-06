@@ -1,9 +1,8 @@
 # prosystem
 
-> A Vue.js project
 
-基于知识图谱的产生式系统前端（Based on Vue2.x）
 
+基于知识图谱的产生式系统
 ## Build Setup
 
 ``` bash
