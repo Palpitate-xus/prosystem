@@ -1,12 +1,15 @@
 <template>
   <div>
-    <el-button @click="handleDelete">批量删除</el-button>
-    <el-button @click="handleAdd">新增对象</el-button>
-    <el-button @click="get_list">刷新</el-button>
+    <el-button @click="handleDelete" type="danger" icon="el-icon-delete">批量删除</el-button>
+    <el-button @click="handleAdd" icon="el-icon-plus">新增对象</el-button>
+    <el-button @click="get_list" icon="el-icon-setting">领域管理</el-button>
+    <el-button @click="get_list" type="primary">刷新</el-button>
     <el-table
+      v-loading="loading"
       ref="filterTable"
       :data="tableData"
       style="width: 100%"
+      stripe
       @selection-change="handleSelectionChange">
       <el-table-column
       type="selection"
@@ -31,12 +34,6 @@
         :filter-method="filterHandlerField"
         />
 
-        <el-table-column
-        label="Class"
-        sortable
-        />
-
-
       <el-table-column
         prop="properties"
         label="Property"
@@ -54,13 +51,17 @@
       </el-table-column>
       <el-table-column label="操作">
       <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDeleteItem(scope.$index, scope.row)">删除</el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            icon="el-icon-edit"
+            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            icon="el-icon-delete"
+            @click="handleDeleteItem(scope.$index, scope.row)">删除</el-button>
+
       </template>
     </el-table-column>
     </el-table>
@@ -88,6 +89,7 @@
           field: '',
           properties: [],
         },
+        loading: true,
       }
     },
     mounted(){
@@ -114,6 +116,7 @@
         console.log(_this.filterDataField);
         console.log(_this.filterDataProperty);
         })
+        this.loading = false;
       },
       handleEdit(index, row){
         this.$refs['update'].dialogFormVisible = true;
@@ -139,7 +142,7 @@
         this.muSelection = val;
       },
       filterTag(value, row) {
-        return row.properties.indexOf(value) > 0;
+        return row.properties.indexOf(value) >= 0;
       },
       filterHandlerField(value, row) {
         return value === row.field;

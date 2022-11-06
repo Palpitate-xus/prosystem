@@ -78,6 +78,7 @@
     mounted(){
       this.fetch_field();
       this.fetch_properties('1');
+      this.value_field = 1;
     },
     methods:{
       async fetch_field(){

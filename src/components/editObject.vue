@@ -21,17 +21,7 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="Class:">
-            <el-select v-model="form.field" placeholder="请选择类">
-              <el-option
-                v-for="item in classes"
-                filterable
-                :key="item.value"
-                :label="item.text"
-                :value="item.value"
-              />
-            </el-select>
-          </el-form-item>
+
           <el-form-item label="Properties:">
             <el-tag
               :key="tag"
@@ -98,13 +88,7 @@
           console.log(_this.fields);
         })
       },
-      async fetch_class(){
-        let _this = this;
-        await axios.post('http://localhost:8000/api/get_classList', this.form.field).then((res) => {
-          _this.classes = res.data.data;
-          console.log(_this.classes);
-        })
-      },
+
       showInput() {
         this.inputVisible = true;
         this.$nextTick(_ => {
